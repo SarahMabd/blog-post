@@ -19,9 +19,16 @@ PostRouter.get('/', async(req, res) => {
     // res.render('posts/new')
 });
 PostRouter.post('/', async(req, res) => {
-    const post = new Posts ({
-
-    })
+    const {title, author, post, _id} = req.body;
+    try {
+        let addPost;
+        addPost = await Posts.create({title, author,  post, comments : []});
+        res.statusCode = 200;
+        res.send({"message" : "Posted successfully"});
+    } catch (err) {
+        res.statusCode = 400;
+        res.send({ "message" : "Something went wrong, try to refresh"});
+    }
 });
 
 module.exports = PostRouter;
