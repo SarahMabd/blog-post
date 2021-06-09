@@ -1,13 +1,27 @@
 const express = require('express')
-const router = express.Router()
+const mongoose = require('mongoose')
+const PostRouter = express.Router()
+const Posts = require('./../Models/posts')
 
+exports.Router = PostRouter;
+exports.Post = Posts;
 
-
-router.get('/new', (req, res) => {
-    res.render('posts/new')
+//get list of all posts
+PostRouter.get('/', async(req, res) => {
+    try{
+        const posts = await Posts.find({}).exec();
+        res.statusCode = 200;
+        res.send({"Posts" : posts});
+    }catch(err){
+         res.statusCode = 422;
+         res.send({ "message" : "Something went wrong, try to refresh"});
+    }
+    // res.render('posts/new')
 });
-router.post('/', (req, res) => {
+PostRouter.post('/', async(req, res) => {
+    const post = new Posts ({
 
+    })
 });
 
-module.exports = router;
+module.exports = PostRouter;
