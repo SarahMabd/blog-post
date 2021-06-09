@@ -66,4 +66,21 @@ PostRouter.patch('/:id', async (req, res) => {
          res.send({ "message" : "Something went wrong, try to refresh"});
         }
  });
+ //delete post by id
+ PostRouter.delete('/:id', async (req, res) => {
+    try{
+        const deletedPost = await Posts.findOne({_id : req.params.id});
+        if(deletedPost != null){
+            await Posts.deleteOne({_id : req.params.id});
+            res.statusCode = 200;
+            res.send({"message":"Post deleted Successfully"});
+        }else{
+            res.statusCode = 404;
+            res.send({"message":"There is no post like that"});
+        }
+    }catch(err){
+         res.statusCode = 422;
+         res.send({ "message" : "Something went wrong, try to refresh"});
+        }
+ });
 module.exports = PostRouter;
