@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/posts', postRouter)
-app.use('/comment', commentRouter);
+app.use('/posts/comment', commentRouter);
 
 app.set('view engine', 'ejs')
 
