@@ -4,13 +4,13 @@ const CommentRouter = express.Router()
 const Posts = require('./../Models/posts')
 
 //add new comment
-CommentRouter.post('/addComment/:postId', async (req, res) => {
-    const { commenter, comment } = req.body;
+CommentRouter.post('/:postId', async (req, res) => {
+    const { commenterName, comment } = req.body;
     let addComment;
     try {
         const post = await Posts.findOne({ _id: req.params.postId }).exec();
         if (post != null) {
-            addComment = { commenter, comment };
+            addComment = { commenterName, comment };
             await Posts.updateOne({ _id: req.params.postId }, { $push: { comments: addComment } });
             res.statusCode = 200;
             res.send({ "message": "Comment added successfully" });
@@ -25,7 +25,7 @@ CommentRouter.post('/addComment/:postId', async (req, res) => {
 });
 
 //get list of all comment on a post by id
-CommentRouter.get('/comments/:postId', async (req, res) => {
+CommentRouter.get('/:postId', async (req, res) => {
     try {
         const post = await Posts.findOne({ _id: req.params.postId }).exec();
         if (post != null) {
