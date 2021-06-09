@@ -18,6 +18,7 @@ PostRouter.get('/', async(req, res) => {
     }
     // res.render('posts/new')
 });
+//add new post
 PostRouter.post('/', async(req, res) => {
     const {title, author, post} = req.body;
     try {
@@ -31,4 +32,20 @@ PostRouter.post('/', async(req, res) => {
     }
 });
 
+//get post by id
+PostRouter.get('/:id', async(req, res)=>{
+    try{
+        const post = await Posts.findOne({_id : req.params.id}).exec();
+        if(post != null){
+            res.statusCode = 200;
+            res.send({"Post" : post});
+        }else{
+            res.statusCode = 404;
+            res.send({"message" : "There is no post like that"});
+        }
+    }catch(err){
+         res.statusCode = 422;
+         res.send({ "message" : "Something went wrong, try to refresh"});
+    }
+});
 module.exports = PostRouter;
