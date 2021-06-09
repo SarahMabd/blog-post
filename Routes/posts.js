@@ -19,7 +19,7 @@ PostRouter.get('/', async(req, res) => {
     // res.render('posts/new')
 });
 PostRouter.post('/', async(req, res) => {
-    const {title, author, post, _id} = req.body;
+    const {title, author, post} = req.body;
     try {
         let addPost;
         addPost = await Posts.create({title, author,  post, comments : []});
