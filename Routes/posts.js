@@ -48,4 +48,22 @@ PostRouter.get('/:id', async(req, res)=>{
          res.send({ "message" : "Something went wrong, try to refresh"});
     }
 });
+//update post by id
+PostRouter.patch('/:id', async (req, res) => {
+    let {title, author, post} = req.body;
+    try{
+        const updatedPost = await Posts.findOne({_id : req.params.id});
+        if(updatedPost != null){
+            await Posts.updateOne({_id : req.params.id}, {title : title ?? updatedPost.title, author : author ?? updatedPost.author,post : post ?? updatedPost.post});
+            res.statusCode = 200;
+            res.send({"message":"Post updated Successfully"});
+        }else{
+            res.statusCode = 404;
+            res.send({"message":"There is no post like that"});
+        }
+    }catch(err){
+         res.statusCode = 422;
+         res.send({ "message" : "Something went wrong, try to refresh"});
+        }
+ });
 module.exports = PostRouter;
