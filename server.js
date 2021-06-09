@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 const session = require('express-session');
 require('./db_connection/mongodb');
 const postRouter = require('./Routes/posts')
-
+const commentRouter = require('./Routes/comment')
 
 app.use(express.static('public')); // store anything in static public file like files or images 
 app.use(express.json()); // parses incoming requests with JSON payloads and is based on body-parser
@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/posts', postRouter)
+app.use('/comment', commentRouter);
 
 app.set('view engine', 'ejs')
 
