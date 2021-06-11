@@ -50,10 +50,11 @@ PostRouter.get('/:id', async(req, res)=>{
 //update post by id
 PostRouter.patch('/:id', async (req, res) => {
     let {title, author, post} = req.body;
+    const postID = req.params.id;
     try{
-        const updatedPost = await Posts.findOne({_id : req.params.id});
+        const updatedPost = await Posts.findOne({_id : postID});
         if(updatedPost != null){
-            await Posts.updateOne({_id : req.params.id}, {title : title ?? updatedPost.title, author : author ?? updatedPost.author,post : post ?? updatedPost.post});
+            await Posts.updateOne({_id : postID}, {title : title ?? updatedPost.title, author : author ?? updatedPost.author,post : post ?? updatedPost.post});
             res.statusCode = 200;
             res.send({message:"Post updated Successfully"});
         }else{
