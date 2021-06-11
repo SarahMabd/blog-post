@@ -205,7 +205,7 @@ describe('COMMENTS API', function(){
         });
     });
 
-    it('should delete comment for a post on /posts/comment/:postId/:commentId PATCH', function(done) {
+    it('should delete comment for a post on /posts/comment/:postId/:commentId DELETE', function(done) {
         chai.request(server)
         .get('/posts')
         .end(function(err, res) {
