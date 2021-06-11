@@ -17,8 +17,9 @@ app.use(cookieParser()) // Parse Cookie header and populate req.cookies with an 
 app.get("/", (req, res) => {
 
     res.render('posts/index');
-});
 
+});
+app.set('view engine', 'ejs')
 app.use('/posts', postRouter)
 app.use('/posts/comment', commentRouter);
 
