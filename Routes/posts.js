@@ -11,12 +11,11 @@ PostRouter.get('/', async(req, res) => {
     try{
         const posts = await Posts.find({}).exec();
         res.statusCode = 200;
-        res.send({"Posts" : posts});
+        res.send({posts});
     }catch(err){
          res.statusCode = 422;
-         res.send({ "message" : "Something went wrong, try to refresh"});
+         res.send({ message : "Something went wrong, try to refresh"});
     }
-    // res.render('posts/new')
 });
 //add new post
 PostRouter.post('/', async(req, res) => {
@@ -25,10 +24,10 @@ PostRouter.post('/', async(req, res) => {
         let addPost;
         addPost = await Posts.create({title, author,  post, comments : []});
         res.statusCode = 200;
-        res.send({"message" : "Posted successfully"});
+        res.send({message : "Posted successfully"});
     } catch (err) {
         res.statusCode = 400;
-        res.send({ "message" : "Something went wrong, try to refresh"});
+        res.send({ message : "Something went wrong, try to refresh"});
     }
 });
 
@@ -38,14 +37,14 @@ PostRouter.get('/:id', async(req, res)=>{
         const post = await Posts.findOne({_id : req.params.id}).exec();
         if(post != null){
             res.statusCode = 200;
-            res.send({"Post" : post});
+            res.send({post});
         }else{
             res.statusCode = 404;
-            res.send({"message" : "There is no post like that"});
+            res.send({message : "There is no post like that"});
         }
     }catch(err){
          res.statusCode = 422;
-         res.send({ "message" : "Something went wrong, try to refresh"});
+         res.send({ message : "Something went wrong, try to refresh"});
     }
 });
 //update post by id
@@ -56,14 +55,14 @@ PostRouter.patch('/:id', async (req, res) => {
         if(updatedPost != null){
             await Posts.updateOne({_id : req.params.id}, {title : title ?? updatedPost.title, author : author ?? updatedPost.author,post : post ?? updatedPost.post});
             res.statusCode = 200;
-            res.send({"message":"Post updated Successfully"});
+            res.send({message:"Post updated Successfully"});
         }else{
             res.statusCode = 404;
-            res.send({"message":"There is no post like that"});
+            res.send({message:"There is no post like that"});
         }
     }catch(err){
          res.statusCode = 422;
-         res.send({ "message" : "Something went wrong, try to refresh"});
+         res.send({ message : "Something went wrong, try to refresh"});
         }
  });
  //delete post by id
@@ -73,14 +72,14 @@ PostRouter.patch('/:id', async (req, res) => {
         if(deletedPost != null){
             await Posts.deleteOne({_id : req.params.id});
             res.statusCode = 200;
-            res.send({"message":"Post deleted Successfully"});
+            res.send({message:"Post deleted Successfully"});
         }else{
             res.statusCode = 404;
-            res.send({"message":"There is no post like that"});
+            res.send({message:"There is no post like that"});
         }
     }catch(err){
          res.statusCode = 422;
-         res.send({ "message" : "Something went wrong, try to refresh"});
+         res.send({ message : "Something went wrong, try to refresh"});
         }
  });
 module.exports = PostRouter;
