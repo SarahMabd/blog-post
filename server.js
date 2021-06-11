@@ -15,18 +15,18 @@ app.use(cookieParser()) // Parse Cookie header and populate req.cookies with an 
 
 
 app.get("/", (req, res) => {
-    const posts = [{
-        title: 'test posts',
-        createdAt: new Date(),
-        description: 'test description'
-    }]
-    res.render('posts/index', { posts: posts });
+    // const posts = [{
+    //     title: 'test posts',
+    //     createdAt: new Date(),
+    //     description: 'test description'
+    // }]
+    // res.render('posts/index', { posts: posts });
+    app.use('/posts', postRouter);
 });
 
 app.use('/posts', postRouter)
 app.use('/posts/comment', commentRouter);
 
-app.set('view engine', 'ejs')
 
 app.listen(process.env.PORT || 3000, () => {
     console.info(`server listening on port 3000`);
