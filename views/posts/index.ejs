@@ -11,27 +11,8 @@
 
 <body>
     <div class="container">
-        <h1>Blog Posts</h1>
-        <a href="/posts/new" class="btn btn-success">New Post</a>
+        <h1>Welcome to Blog Posts Api</h1>
 
-        <% posts.forEach(post => {%>
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <%= post.title %>
-                    </h4>
-                    <div class="card-subtitle text-muted mb-2">
-                        <%= post.createdAt.toLocaleDateString() %>
-                    </div>
-
-                    <div class="card-text mb-2">
-                        <%= post.description %>
-
-                    </div>
-                </div>
-
-            </div>
-            <%}) %>
     </div>
 </body>
 

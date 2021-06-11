@@ -15,13 +15,8 @@ app.use(cookieParser()) // Parse Cookie header and populate req.cookies with an 
 
 
 app.get("/", (req, res) => {
-    // const posts = [{
-    //     title: 'test posts',
-    //     createdAt: new Date(),
-    //     description: 'test description'
-    // }]
-    // res.render('posts/index', { posts: posts });
-    app.use('/posts', postRouter);
+
+    res.render('posts/index');
 });
 
 app.use('/posts', postRouter)
